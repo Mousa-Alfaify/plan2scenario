@@ -104,11 +104,15 @@ src/
 
 ## النشر
 
-الموقع منشور عبر GitHub Pages من فرع `gh-pages`. لإعادة النشر بعد أي تعديل:
+الموقع منشور عبر **GitHub Pages** من فرع `main` ومجلد `/docs`:
+
+**https://mousa-alfaify.github.io/plan2scenario/**
+
+لإعادة النشر بعد أي تعديل — أمر واحد:
 
 ```bash
-npm run build
-git -C dist init -q && git -C dist add -A
-git -C dist commit -q -m deploy
-git -C dist push -f git@github.com:Mousa-Alfaify/plan2scenario.git main:gh-pages
+npm run build && touch docs/.nojekyll && cp docs/index.html docs/404.html && git add -A && git commit -m "تحديث الموقع" && git push
 ```
+
+> `npm run build` يُخرج إلى `docs/` مباشرة (مضبوط في `vite.config.ts`)، والمسارات نسبية
+> (`base: './'`) فيعمل الموقع على أي دومين أو مسار فرعي، وحتى بفتح `docs/index.html` محليًا.
