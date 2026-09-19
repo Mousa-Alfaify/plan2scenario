@@ -1,0 +1,58 @@
+@font-face{font-family:'Thmanyah Sans';src:url('./fonts/thmanyahsans-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('./fonts/thmanyahsans-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('./fonts/thmanyahsans-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('./fonts/thmanyahsans-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('./fonts/thmanyahsans-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Display';src:url('./fonts/thmanyahserifdisplay-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Display';src:url('./fonts/thmanyahserifdisplay-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { --ring: 62 117 96; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-sand-100 text-ink font-sans antialiased;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    text-rendering: optimizeLegibility;
+  }
+  * { scrollbar-width: thin; scrollbar-color: #D3D3CD transparent; }
+  *::-webkit-scrollbar { width: 9px; height: 9px }
+  *::-webkit-scrollbar-thumb { background: #D3D3CD; border-radius: 8px }
+  *::-webkit-scrollbar-track { background: transparent }
+  :focus-visible { @apply outline-none ring-2 ring-forest-500 ring-offset-2 ring-offset-sand-100 rounded-md; }
+  h1,h2,h3,h4 { @apply font-bold text-ink; letter-spacing: -0.01em }
+  input, select, textarea, button { font-family: inherit }
+  /* Latin terms inside Arabic text */
+  .lat { font-family: 'Thmanyah Sans', ui-sans-serif, system-ui; direction: ltr; unicode-bidi: isolate; letter-spacing: 0 }
+}
+
+@layer components {
+  .card { @apply bg-white rounded-xl2 border border-stone-200/80 shadow-card }
+  .card-pad { @apply p-5 sm:p-6 }
+  .label { @apply block text-[13px] font-medium text-ink-soft mb-1.5 }
+  .field {
+    @apply w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-[14px] text-ink
+           placeholder:text-stone-400 transition
+           focus:border-forest-500 focus:ring-2 focus:ring-forest-500/20 focus:outline-none;
+  }
+  .field-sm { @apply px-2.5 py-1.5 text-[13px] }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium }
+  .th { @apply px-3 py-2.5 text-right text-[12.5px] font-semibold text-ink-soft bg-stone-50 border-b border-stone-200 whitespace-nowrap }
+  .td { @apply px-3 py-2.5 text-[13.5px] text-ink align-top border-b border-stone-100 }
+  .prose-ar p { @apply leading-[2] text-[15px] text-ink-soft }
+  .prose-ar strong { @apply text-ink font-bold }
+}
+
+@media print {
+  .no-print { display: none !important }
+  body { background: #fff }
+  .card { box-shadow: none !important; border-color: #ccc !important; break-inside: avoid }
+  .print-full { position: static !important; width: 100% !important; margin: 0 !important; padding: 0 !important }
+}
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+.anim-in { animation: fadeUp .28s ease-out both }
+@media (prefers-reduced-motion: reduce) { .anim-in { animation: none } * { transition: none !important } }
